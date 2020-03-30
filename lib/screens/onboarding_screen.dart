@@ -1,3 +1,4 @@
+import 'package:cornavirusslider/widget/slide_dots.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import '../models/slide.dart';
@@ -46,6 +47,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff269398),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -53,14 +55,31 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       body: Column(
         children: <Widget>[
           Expanded(
-            child: PageView.builder(
-                onPageChanged: _onPageChanged,
-                controller: _pageController,
-                scrollDirection: Axis.horizontal,
-                itemCount: slideList.length,
-                itemBuilder: (ctx, i) {
-                  return SlideItem(i);
-                }),
+            child: Stack(
+              children: <Widget>[
+                PageView.builder(
+                    onPageChanged: _onPageChanged,
+                    controller: _pageController,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: slideList.length,
+                    itemBuilder: (ctx, i) {
+                      return SlideItem(i);
+                    }),
+                Container(
+                  alignment: AlignmentDirectional.bottomCenter,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      for (int i = 0; i < slideList.length; i++)
+                        if (_currentPage == i)
+                          SlideDots(true)
+                        else
+                          SlideDots(false)
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
           SizedBox(
             height: 40,
@@ -87,15 +106,22 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'You have account ?',
+                      'Powerd By',
                       style: TextStyle(
                         fontSize: 18,
                       ),
                     ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Icon(
+                      Icons.flash_auto,
+                      color: Color(0xffdaeef5),
+                    ),
                     FlatButton(
                       onPressed: () {},
                       child: Text(
-                        'Login',
+                        'Active Code',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/slide.dart';
 
 class SlideItem extends StatelessWidget {
-  int index;
+  final int index;
 
   SlideItem(this.index);
 
