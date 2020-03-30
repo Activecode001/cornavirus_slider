@@ -25,8 +25,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       }
       _pageController.animateToPage(
         _currentPage,
-        duration: Duration(milliseconds: 300),
-        curve: Curves.easeIn,
+        duration: Duration(milliseconds: 700),
+        curve: Curves.bounceInOut,
       );
     });
   }
